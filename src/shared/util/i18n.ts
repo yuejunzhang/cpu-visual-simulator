@@ -17,7 +17,7 @@
 	6) Translate eventual messages inside .env/develop/resources/messages.yaml and .env/main/resources/messages.yaml
 */
 
-export const SUPPORTED_LANGUAGES = ["en", "it", "es"] as const
+export const SUPPORTED_LANGUAGES = ["en", "it", "es","zh"] as const
 export const DEFAULT_LANGUAGE = "en"
 export type Language = typeof SUPPORTED_LANGUAGES[number]
 

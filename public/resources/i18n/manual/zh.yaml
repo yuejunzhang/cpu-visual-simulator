@@ -1,0 +1,139 @@
+title: "手册"
+page_title: "手册"
+sections:
+  introduction:
+    title: "简介"
+    subsections:
+      introduction:
+        title: "简介"
+        text: |
+          CPU 视觉模拟器允许您输入并可视化汇编语言代码的执行。
+          指令和数字数据可以直接在 RAM 中插入或修改。可以定义
+          “标签”（用于代替内存地址的标识符）：这些标签可以用作跳转指令中的参数，或作为变量标识符。在任何时候，都可以在符号和二进制表示之间切换。也可以直接修改程序计数器、累加器或状态字的负号和零标志。程序可以执行：
+          正常执行（CPU 继续执行指令，直到暂停或程序结束）、
+          一次一条语句，或一次一个微步骤。还提供文本转语音功能，如果启用，将激活合成语音，解释 CPU 正在执行的操作。
+  instruction_set:
+    title: "指令集"
+    subsections:
+      instruction_set:
+        title: "指令集"
+        instruction_structure:
+          title: "指令结构"
+          opcode_desc: "确定要执行的操作"
+          immediate_flag_desc: "确定操作数是立即数还是直接数"
+          operand_desc: "指令操作的值"
+        addressing_modes:
+          title: "寻址模式"
+          subsections:
+            immediate:
+              title: "立即寻址"
+              paragraphs:
+                - "立即操作数是前面带有 '#' 符号的操作数。"
+                - "立即操作数的值必须在 8 位范围内（127 到 -128）。"
+                - "如果操作数是标签，则该标签关联的地址将用作操作数。"
+            direct:
+              title: "直接寻址"
+              paragraphs:
+                - "没有 '#' 符号的操作数是直接操作数。"
+                - "直接操作数表示存储操作数值的地址。"
+                - "有效的直接操作数必须是有效的地址，因此它应该是 0 到 254 之间的偶数或有效的标签。"
+  keyboard_shortcuts:
+    title: "键盘快捷键"
+    subsections:
+      keyboard_shortcuts:
+        title: "键盘快捷键"
+  code_files:
+    title: "代码文件"
+    subsections:
+      code_files:
+        title: "代码文件"
+        paragraphs:
+          - "CPUVS 可以从具有 \".cpuvs\" 扩展名的简单纯文本文件中加载程序或将程序存储到其中。"
+        new_lines:
+          title: "换行"
+          paragraphs:
+            - "在 .cpuvs 文件中，每行可能包含一条指令。"
+            - "不包含有效指令的行只能包含注释。"
+            - "允许空行，并且将被忽略。"
+            - "每行的内容将存储在从地址 0 开始的内存地址中。"
+            - "空行或仅包含注释的行将被忽略。"
+        syntax:
+          title: "语法"
+          paragraphs:
+            - "有效行的格式如下：'LABEL: INSTRUCTION'（不含单引号）。"
+            - "LABEL：此字段是可选的。如果省略此字段，则也应省略 ':' 符号。"
+            - "INSTRUCTION：此字段表示地址的内容。语法与直接将指令输入 RAM 时使用的语法相同，任何可以写入 RAM 单元格的内容都可以写在这里（二进制输入除外）。"
+            - "忽略前导和尾随的空格以及制表符。"
+            - "如果您尝试加载到 CPUVS 中的文件包含错误，将在模拟器顶部边缘显示包含错误详细信息的错误消息。"
+            - "注释定义为从符号 ';' 开始直到新行的所有内容。"
+  ui:
+    title: "用户界面"
+  examples:
+    title: "示例"
+    subsections:
+      if_then_else:
+        title: "高级 IF-THEN-ELSE 示例及其翻译"
+      do_while:
+        title: "高级 WHILE-DO 示例及其翻译"
+  opcodes_table:
+    sections_titles:
+      control_flow: "控制流"
+      data_flow: "数据流"
+      arithmetic_logic: "算术逻辑"
+    descriptions:
+      NOP: "无操作，转到下一条指令"
+      HLT: "停止执行"
+      JMP: "无条件跳转到位置 X 的指令"
+      JZ: "零跳转：如果设置了标志 Z，则转到指令 X，否则转到下一条指令"
+      JNZ: "非零跳转：如果清除了标志 Z，则转到指令 X，否则转到下一条指令"
+      JN: "负跳转：如果设置了标志 N，则转到指令 X，否则转到下一条指令"
+      JNN: "非负跳转：如果清除了标志 N，则转到指令 X，否则转到下一条指令"
+      LOD: "将内存位置 X（或数字 #X）的内容加载到累加器中"
+      STO: "将累加器的值存储到内存位置 X 中"
+      ADD: "将内存位置 X（或数字 #X）的内容加到累加器中。更新标志"
+      SUB: "从累加器中减去内存位置 X（或数字 #X）的内容。更新标志"
+      MUL: "将累加器乘以内存位置 X（或数字 #X）的内容。更新标志"
+      DIV: "将累加器除以内存位置 X（或数字 #X）的内容。更新标志"
+      AND: "累加器与内存位置 X（或数字 #X）的内容进行按位 AND 运算。更新标志"
+      CMP: "从累加器中减去内存位置 X（或数字 #X）的内容。更新标志，但累加器的内容不修改"
+      NOT: "对内存位置 X（或数字 #X）的内容进行按位 NOT 运算。结果存储在累加器中"
+  shortcuts_table:
+    ram_editing:
+      title: "RAM 编辑"
+      headers:
+        keys: "按键"
+        condition: "条件"
+        description: "描述"
+      shortcuts:
+        - keys: "ENTER"
+          condition: "未选择单元格/标签"
+          description: "选择第一个可见单元格。"
+        - keys: "ENTER"
+          condition: "已选择单元格/标签"
+          description: "将所选单元格内容提交到 RAM。"
+        - keys: "ARROW UP"
+          condition: "已选择单元格/标签"
+          description: "选择上一个地址。"
+        - keys: "ARROW DOWN"
+          condition: "已选择单元格/标签"
+          description: "选择下一个地址。"
+        - keys: "SHIFT + ARROW UP"
+          condition: "已选择单元格/标签"
+          description: |
+            所选地址上方（含）的所有单元格向上移动一位。
+            第一个地址的内容丢失，并在所选地址处插入 "NOP"。
+        - keys: "SHIFT + ARROW DOWN"
+          condition: "已选择单元格/标签"
+          description: |
+            所选地址上方（不含）的所有单元格向下移动一位。所选地址的内容
+            丢失，并在第一个地址处插入 "NOP"。
+        - keys: "CTRL + ARROW UP"
+          condition: "已选择单元格/标签"
+          description: |
+            所选地址下方（不含）的所有单元格向上移动一位。所选地址的内容
+            丢失，并在最后一个地址处插入 "NOP"。
+        - keys: "CTRL + ARROW DOWN"
+          condition: "已选择单元格/标签"
+          description: |
+            所选地址下方（含）的所有单元格向下移动一位。最后一个
+            地址的内容丢失，并在所选地址处插入 "NOP"。

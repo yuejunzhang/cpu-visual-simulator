@@ -4,6 +4,7 @@
 	import It from "../flags/it.svelte"
 	import En from "../flags/en.svelte"
 	import Es from "../flags/es.svelte"
+import Zh from "../flags/zh.svelte"
 	import { Language, SUPPORTED_LANGUAGES } from "../../util/i18n"
 
 	export let value: Language
@@ -11,7 +12,8 @@
 	const flags = new Map<Language, typeof SvelteComponent>([
 		["en", En],
 		["it", It],
-		["es", Es]
+		["es", Es],
+    ["zh", Zh]
 	])
 </script>
 
